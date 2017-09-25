@@ -1,0 +1,62 @@
+﻿@using FinancialManager.Models
+@model FinancialManager.Models.MainPageOutputModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <h1>Incomes</h1>
+        </div>
+
+        @foreach (var incomeSource in Model.Incomes)
+            {
+            <div class="col-md-4">
+            </div>
+        }
+
+        <div class="row">
+
+            <h1>Wallets</h1>
+        </div>
+        <div class="row">
+            @foreach (var wallet in Model.Wallets)
+            {
+                <div class="col-md-4">
+                    <h4>@wallet.Name</h4>
+                    <h6>@wallet.Balance@wallet.Currency</h6>
+                    @if (wallet.IsCreditCard)
+                    {
+                        <h6>Overdraft @wallet.Overdraft@wallet.Currency</h6>
+                    }
+                </div>
+            }
+
+        </div>
+        <div class="row">
+            <h1>Categories</h1>
+        </div>
+        <div class="row" id="categories">
+
+            @foreach (var category in Model.Categories)
+            {
+                @Html.Partial("_category", category)
+            }
+            <div class="col-md-4">
+                @Html.Partial("_addCategory", new CategoryInputModel())
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+
+            <h1>Transactions</h1>
+            @foreach (var transaction in Model.Transactions)
+            {
+
+            }
+        </div>
+    </div>
+</div>
