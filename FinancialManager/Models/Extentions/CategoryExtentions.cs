@@ -2,6 +2,7 @@
 using System.Linq;
 using FinancialManagerLibrary;
 using FinancialManagerLibrary.Utilities;
+using FinancialManager.Models.OutputModels;
 
 namespace FinancialManager.Models.Extentions
 {

@@ -9,7 +9,7 @@ namespace FinancialManagerDatabase.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "FinancialManagerDatabase.FinancialManagerModel";
         }
 

@@ -1,6 +1,6 @@
 ﻿using FinancialManagerLibrary;
 
-namespace FinancialManager.Models
+namespace FinancialManager.Models.OutputModels
 {
     public class WalletOutputModel
     {

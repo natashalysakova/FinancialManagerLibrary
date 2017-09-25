@@ -1,0 +1,10 @@
+﻿@model FinancialManager.Models.OutputModels.WalletOutputModel
+<div class="col-md-4">
+    <h6 class="text-hide">@Model.Id</h6>
+    <h4>@Model.Name</h4>
+    <h6>Balance @Model.Balance@Model.Currency</h6>   
+    @if (Model.IsCreditCard)
+    {
+        <h6 class="text-muted">@Model.Overdraft @Model.Currency</h6>
+    }
+</div>

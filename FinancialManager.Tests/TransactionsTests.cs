@@ -3,6 +3,7 @@ using FinancialManagerLibrary;
 using FinancialManagerLibrary.Transactions;
 using FinancialManagerLibrary.Wallets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FinancialManagerLibrary.Exceptions;
 
 namespace FinancialManager.Tests
 {
@@ -29,7 +30,7 @@ namespace FinancialManager.Tests
         [TestMethod]
         public void PositiveTransaction()
         {
-            var unused = new Transaction(_wallet, _category, 100, DateTime.Now, "test1");
+            var unused = new Transaction(_wallet, _category, 100, Currency.UAH, DateTime.Now, "test1");
 
             Assert.AreEqual(25.0, _wallet.Balance);
             Assert.AreEqual(100.0, _category.Balance);
@@ -39,14 +40,14 @@ namespace FinancialManager.Tests
         [TestMethod]
         public void NegativeTransaction()
         {
-            var unused = new Transaction(_wallet, _category, 200, DateTime.Now, "test1");
+            var unused = new Transaction(_wallet, _category, 200, Currency.UAH, DateTime.Now, "test1");
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void NegativeAmountTransaction()
         {
-            var unused = new Transaction(_wallet, _category, -50, DateTime.Now, "test1");
+            var unused = new Transaction(_wallet, _category, -50, Currency.UAH, DateTime.Now, "test1");
         }
     }
 }

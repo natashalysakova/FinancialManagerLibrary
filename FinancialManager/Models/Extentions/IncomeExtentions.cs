@@ -1,4 +1,6 @@
-﻿using FinancialManagerLibrary.Incomes;
+﻿using FinancialManager.Models.OutputModels;
+using FinancialManagerLibrary.Incomes;
+using FinancialManagerLibrary.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +16,9 @@ namespace FinancialManager.Models.Extentions
             {
                 Name = income.Name,
                 Balance = income.Balance,
-                Currency = income.Currency,
-                PlannedAmount = income.PlannedAmount
+                Currency = CurrencyTools.GetCurrencySymbol(income.Currency),
+                PlannedAmount = income.PlannedAmount,
+                Id = income.Id
             };
             return model;
         }

@@ -2,21 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FinancialManagerDatabase
 {
-    public abstract class BaseService<T> : IDataService<T> where T:class
+    public class BaseService<T> : IDataService<T> where T:class
     {
         private readonly FinancialManagerModel _model;
         private readonly DbSet<T> _dbSet;
 
-        public BaseService(FinancialManagerModel model, DbSet<T> dbSet)
+        public BaseService(FinancialManagerModel model)
         {
             _model = model;
-            _dbSet = dbSet;
+            _dbSet = model.Set<T>();
         }
 
         public T Add(T category)
@@ -52,7 +53,7 @@ namespace FinancialManagerDatabase
 
         public T Update(T category)
         {
-            _model.Entry(category).State = EntityState.Modified;
+            _dbSet.AddOrUpdate(category);
             _model.SaveChanges();
             return category;
         }

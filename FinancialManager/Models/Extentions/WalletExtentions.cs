@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using FinancialManagerLibrary.Utilities;
 using FinancialManagerLibrary.Wallets;
+using FinancialManager.Models.OutputModels;
 
 namespace FinancialManager.Models.Extentions
 {

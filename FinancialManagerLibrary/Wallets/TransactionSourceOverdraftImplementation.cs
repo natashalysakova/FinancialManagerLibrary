@@ -1,4 +1,5 @@
-﻿using FinancialManagerLibrary.Transactions;
+﻿using FinancialManagerLibrary.Exceptions;
+using FinancialManagerLibrary.Transactions;
 
 namespace FinancialManagerLibrary.Wallets
 {

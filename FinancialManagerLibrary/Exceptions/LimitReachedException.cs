@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace FinancialManagerLibrary.Wallets
+namespace FinancialManagerLibrary.Exceptions
 {
     [Serializable]
     public class LimitReachedException : Exception

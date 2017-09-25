@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FinancialManagerLibrary;
 
-namespace FinancialManager.Models
+namespace FinancialManager.Models.OutputModels
 {
     public class CategoryOutputModel
     {

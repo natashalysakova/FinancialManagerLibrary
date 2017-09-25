@@ -1,0 +1,10 @@
+﻿@model FinancialManager.Models.InputModels.IncomeInputModel
+
+@using (Ajax.BeginForm("AddIncome", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddIncome(data);", OnFailure = "OnError(error)" }))
+{
+    @Html.TextBoxFor(x => x.Name)
+    @Html.TextBoxFor(x => x.PlannedAmount)
+    @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
+    
+    <button type="submit">Add</button>
+}

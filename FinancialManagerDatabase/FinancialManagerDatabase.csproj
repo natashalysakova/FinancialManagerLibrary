@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
-    <Compile Include="CategoryService.cs" />
     <Compile Include="EntityDataSource.cs" />
     <Compile Include="FinancialManagerModel.cs" />
     <Compile Include="Migrations\201709231526069_InitialCreate.cs" />
@@ -73,12 +72,13 @@
     <Compile Include="Migrations\201709231647143_addWallet.Designer.cs">
       <DependentUpon>201709231647143_addWallet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709251128485_FullDb.cs" />
+    <Compile Include="Migrations\201709251128485_FullDb.Designer.cs">
+      <DependentUpon>201709251128485_FullDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="TransactionService.cs" />
-    <Compile Include="WalletService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IncomeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709231647143_addWallet.resx">
       <DependentUpon>201709231647143_addWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251128485_FullDb.resx">
+      <DependentUpon>201709251128485_FullDb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,0 +1,18 @@
+﻿@model FinancialManager.Models.InputModels.TransactionInputModel
+
+@using (Ajax.BeginForm("AddTransaction", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddTransaction(data);", OnFailure = "OnError(error)" }))
+{
+    @Html.TextBoxFor(x => x.FromType)
+    @Html.TextBoxFor(x => x.FromId)
+
+    @Html.TextBoxFor(x => x.ToType)
+    @Html.TextBoxFor(x => x.ToId)
+
+
+    @Html.TextBoxFor(x => x.Amount) @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
+
+    @Html.TextBoxFor(x=>x.Date)
+    @Html.TextBoxFor(x=>x.Comment)
+    
+    <button type="submit">Add</button>
+}

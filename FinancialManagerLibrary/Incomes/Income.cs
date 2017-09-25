@@ -10,7 +10,7 @@ namespace FinancialManagerLibrary.Incomes
     {
         public Income(string name, Currency currency) : base(name, currency)
         {
-            SourceImplementation = new TransactionSourceDefaultImplementation();
+            SourceImplementation = new TransactionIncomeImplementation();
         }
 
         public Income(string name, Currency currency, double plannedIncome) : this(name, currency)
@@ -20,7 +20,6 @@ namespace FinancialManagerLibrary.Incomes
 
         public Income() : this(string.Empty, Currency.UAH)
         {
-
         }
 
         public double PlannedAmount { get; set; }

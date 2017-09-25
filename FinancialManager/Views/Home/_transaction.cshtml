@@ -1,0 +1,8 @@
+﻿@model FinancialManager.Models.OutputModels.TransactionOutputModel
+<div class="col-md-4">
+    <h6 class="text-hide">@Model.Id</h6>
+    <h4>@Model.From</h4> - > <h4>@Model.To</h4>
+    <h6>Amount @Model.Amount @Model.Currency</h6>
+    <h6 class="text-muted">@Model.Date.ToShortDateString()</h6>
+    <h6 class="text-muted">@Model.Comment</h6>
+</div>

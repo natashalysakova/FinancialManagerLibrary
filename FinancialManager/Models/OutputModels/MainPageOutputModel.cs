@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using FinancialManagerLibrary.Transactions;
 
-namespace FinancialManager.Models
+namespace FinancialManager.Models.OutputModels
 {
     public class MainPageOutputModel
     {

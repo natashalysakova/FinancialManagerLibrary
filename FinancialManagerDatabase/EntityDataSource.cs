@@ -8,10 +8,10 @@ namespace FinancialManagerDatabase
         public EntityDataSource(string contextName)
         { 
             FinancialManagerModel model = new FinancialManagerModel(contextName);
-            CategoryService = new CategoryService(model);
-            WalletService = new WalletService(model);
-            TransactionService = new TransactionService(model);
-            IncomeService = new IncomeService(model);
+            CategoryService = new BaseService<CategoryEntity>(model);
+            WalletService = new BaseService<WalletEntity>(model);
+            TransactionService = new BaseService<TransactionEntity>(model);
+            IncomeService = new BaseService<IncomeEntity>(model);
         }
 
         public IDataService<CategoryEntity> CategoryService { get;  }

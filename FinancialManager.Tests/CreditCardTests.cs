@@ -1,4 +1,5 @@
 ﻿using FinancialManagerLibrary;
+using FinancialManagerLibrary.Exceptions;
 using FinancialManagerLibrary.Wallets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

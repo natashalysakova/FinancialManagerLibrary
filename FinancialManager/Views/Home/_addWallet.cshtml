@@ -1,0 +1,12 @@
+﻿@model FinancialManager.Models.InputModels.WalletInputModel
+
+@using (Ajax.BeginForm("AddWallet", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddWallet(data);", OnFailure = "OnError(error)" }))
+{
+    @Html.TextBoxFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Balance)
+    @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
+
+    @Html.CheckBoxFor(x=>x.IsCreditCard)
+    @Html.TextBoxFor(x=>x.Overdraft)
+    <button type="submit">Add</button>
+}

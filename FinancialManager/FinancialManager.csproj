@@ -45,6 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -182,14 +190,16 @@
     <Compile Include="Models\Extentions\IncomeExtentions.cs" />
     <Compile Include="Models\Extentions\TransactionExtention.cs" />
     <Compile Include="Models\Extentions\WalletExtentions.cs" />
-    <Compile Include="Models\IncomeOutputModel.cs" />
-    <Compile Include="Models\MainPageOutputModel.cs" />
-    <Compile Include="Models\TransactionOutputModel.cs" />
-    <Compile Include="Models\WalletOutputModel.cs" />
+    <Compile Include="Models\InputModels\IncomeInputModel.cs" />
+    <Compile Include="Models\InputModels\TransactionInputModel.cs" />
+    <Compile Include="Models\InputModels\WalletInputModel.cs" />
+    <Compile Include="Models\OutputModels\IncomeOutputModel.cs" />
+    <Compile Include="Models\OutputModels\MainPageOutputModel.cs" />
+    <Compile Include="Models\OutputModels\TransactionOutputModel.cs" />
+    <Compile Include="Models\OutputModels\WalletOutputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BuisnessService.cs" />
-    <Compile Include="Models\CategoryInputModel.cs" />
-    <Compile Include="Models\CategoryOutputModel.cs" />
+    <Compile Include="Models\InputModels\CategoryInputModel.cs" />
+    <Compile Include="Models\OutputModels\CategoryOutputModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,9 +264,16 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\_addCategory.cshtml" />
     <Content Include="Views\Home\_category.cshtml" />
+    <Content Include="Views\Home\_addTransaction.cshtml" />
+    <Content Include="Views\Home\_transaction.cshtml" />
+    <Content Include="Views\Home\_addWallet.cshtml" />
+    <Content Include="Views\Home\_wallet.cshtml" />
+    <Content Include="Views\Home\_addIncome.cshtml" />
+    <Content Include="Views\Home\_income.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

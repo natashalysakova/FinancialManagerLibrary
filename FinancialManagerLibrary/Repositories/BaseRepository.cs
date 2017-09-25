@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagerLibrary.Repositories
 {
-    public abstract class BaseRepository<T,E> : IRepository<T> where T: IEntity<E>, new()
+    public class BaseRepository<T,E> : IRepository<T> where T: IEntity<E>, new()
     {
         protected readonly IDataService<E> _dataService;
 
@@ -17,37 +17,37 @@ namespace FinancialManagerLibrary.Repositories
             _dataService = dataService;
         }
 
-        public T Add(T category)
+        public virtual T Add(T item)
         {
-            var entity = category.MapToEntity();
+            var entity = item.MapToEntity();
             var newCategoryEntity = _dataService.Add(entity);
-            category.MapFromEntity(newCategoryEntity);
+            item.MapFromEntity(newCategoryEntity);
 
-            return category;
+            return item;
         }
 
-        public T Update(T category)
+        public virtual T Update(T item)
         {
-            var entity = category.MapToEntity();
+            var entity = item.MapToEntity();
             var newCaatogoryEntity = _dataService.Update(entity);
-            category.MapFromEntity(newCaatogoryEntity);
-            return category;
+            item.MapFromEntity(newCaatogoryEntity);
+            return item;
         }
 
-        public bool Delete(int id)
+        public virtual bool Delete(int id)
         {
             return _dataService.Delete(id);
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             var entity = _dataService.Get(id);
-            var category = new T();
-            category.MapFromEntity(entity);
-            return category;
+            var item = new T();
+            item.MapFromEntity(entity);
+            return item;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             var entities = _dataService.GetAll();
             return entities.Select(x => CreateFromEntity(x));

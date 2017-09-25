@@ -1,4 +1,4 @@
-﻿@model FinancialManager.Models.CategoryInputModel
+﻿@model FinancialManager.Models.InputModels.CategoryInputModel
 
 @using (Ajax.BeginForm("AddCategory", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddCategory(data);", OnFailure = "OnError(error)" }))
 {
@@ -6,5 +6,5 @@
     @Html.TextBoxFor(x => x.PlannedAmount)
     @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
     
-    <button type="submit">Add</button>
+    <button class="btn" type="submit">Add</button>
 }

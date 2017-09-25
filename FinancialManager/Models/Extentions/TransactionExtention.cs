@@ -1,4 +1,6 @@
-﻿using FinancialManagerLibrary.Transactions;
+﻿using FinancialManager.Models.OutputModels;
+using FinancialManagerLibrary.Transactions;
+using FinancialManagerLibrary.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,8 @@ namespace FinancialManager.Models.Extentions
                 Date = transaction.Date,
                 From = transaction.From.Name,
                 To = transaction.To.Name,
+                Currency = CurrencyTools.GetCurrencySymbol(transaction.Currency),
+                Id = transaction.Id
             };
 
             return model;

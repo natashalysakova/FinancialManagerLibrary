@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FinancialManager.Models
+namespace FinancialManager.Models.OutputModels
 {
     public class TransactionOutputModel
     {
@@ -9,5 +9,7 @@ namespace FinancialManager.Models
         public string To { get; set; }
         public double Amount { get; set; }
         public string Comment { get; set; }
+        public string Currency { get; set; }
+        public int Id { get; internal set; }
     }
 }
