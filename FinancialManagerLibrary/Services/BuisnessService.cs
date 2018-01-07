@@ -48,6 +48,8 @@ namespace FinancialManager.Services
         {
             var newTransaction = _transactionRepository.Add(transaction);
 
+
+
             if (transaction.From is Wallet)
             {
                 _walletRepository.Update(transaction.From as Wallet);

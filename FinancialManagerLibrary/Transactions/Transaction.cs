@@ -4,12 +4,14 @@ using FinancialManagerLibrary.Models;
 using FinancialManagerLibrary.Wallets;
 using FinancialManagerLibrary.Incomes;
 using FinancialManagerLibrary.Utilities;
+using FinancialManagerLibrary.Strategies;
 
 namespace FinancialManagerLibrary.Transactions
 {
     public class Transaction : IEntity<TransactionEntity>
     {
         private double _amount;
+        private ITransactionStrategy strategy;
 
         [Obsolete]
         public Transaction()
@@ -24,6 +26,8 @@ namespace FinancialManagerLibrary.Transactions
             Comment = comment;
             Date = date;
             Currency = currency;
+
+            strategy = new 
 
             StartTransaction();
         }

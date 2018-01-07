@@ -52,6 +52,7 @@
     <Compile Include="Models\WalletEntity.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Services\BuisnessService.cs" />
+    <Compile Include="Strategies\ITransactionStrategy.cs" />
     <Compile Include="TransactionBase.cs" />
     <Compile Include="TransactionItemType.cs" />
     <Compile Include="Utilities\CurrencyTool.cs" />
