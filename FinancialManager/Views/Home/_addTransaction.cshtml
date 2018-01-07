@@ -1,18 +1,151 @@
-﻿@model FinancialManager.Models.InputModels.TransactionInputModel
+﻿@*@using System.Web.UI.WebControls
+@model FinancialManager.Models.InputModels.TransactionInputModel
 
-@using (Ajax.BeginForm("AddTransaction", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddTransaction(data);", OnFailure = "OnError(error)" }))
+
+<ul class="nav nav-tabs" id="transactionTabs">
+    <li class="nav-item" onclick="MakeActive(this)">
+        <a class="nav-link active" onclick="ShowTab('output')">Расход</a>
+    </li>
+    <li class="nav-item" onclick="MakeActive(this)">
+        <a class="nav-link" onclick="ShowTab('input')">Доход</a>
+    </li>
+    <li class="nav-item" onclick="MakeActive(this)">
+        <a class="nav-link" onclick="ShowTab('transfer')">Перевод</a>
+    </li>
+</ul>
+
+<div class="col-8 transactionForm" id="output">
+
+    @using (Ajax.BeginForm("AddTransaction", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddTransaction(data);", OnFailure = "OnError(error)" }))
+    {
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.FromType, new { @Value = "Wallet", @class = "hidden" })
+            @Html.LabelFor(x => x.FromId, "Из", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.FromId, new List<SelectListItem>(ViewBag.ExpencesSourceList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.ToType, new { @Value = "Category", @class = "hidden" })
+            @Html.LabelFor(x => x.ToId, "В", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.ToId, new List<SelectListItem>(ViewBag.ExpencesTargetList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Amount, "Сумма", new { @class = "col-2 col-form-label" })
+            <div class="col-6">
+                @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+            </div>
+            <div class="col-4">
+                @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList), new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessage(nameof(Model.Currency))
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Дата", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Date, new { @class = "form-control", @data_provide = "datepicker" })
+            </div>
+            @Html.ValidationMessage(nameof(Model.Date))
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Комментарий", new { @class = "col-2 col-form-label"})
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Comment, new { @class = "form-control"})
+            </div>
+            @Html.ValidationMessage(nameof(Model.Comment))
+        </div>
+
+        <button type="submit" class="btn btn-primary">Добавить</button>
+        <button type="reset" class="btn btn-primary">Сбросить</button>
+
+    }
+</div>
+<div class=" transactionForm hidden" id="input">
+    @using (Ajax.BeginForm("AddTransaction", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddTransaction(data);", OnFailure = "OnError(error)" }))
+    {
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.FromType, new { @Value = "Wallet", @class = "hidden" })
+            @Html.LabelFor(x => x.FromId, "Из", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.FromId, new List<SelectListItem>(ViewBag.ExpencesSourceList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.ToType, new { @Value = "Category", @class = "hidden" })
+            @Html.LabelFor(x => x.ToId, "В", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.ToId, new List<SelectListItem>(ViewBag.ExpencesTargetList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Amount, "Сумма", new { @class = "col-2 col-form-label" })
+            <div class="col-8">
+                @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+            </div>
+            <div class="col-2">
+                @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Дата", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+            </div>
+
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Дата", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Comment, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    }
+</div>
+
+<div class="transactionForm hidden" id="transfer">
+    @using (Ajax.BeginForm("AddTransaction", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddTransaction(data);", OnFailure = "OnError(error)" }))
+    {
+        <p>Перевод</p>
+
+        @Html.TextBoxFor(x => x.FromType)
+
+        @Html.TextBoxFor(x => x.ToType)
+
+
+        @Html.TextBoxFor(x => x.Amount) @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
+
+        @Html.TextBoxFor(x => x.Date)
+        <button type="submit">Add</button>
+    }
+</div>
+
+@section scripts
 {
-    @Html.TextBoxFor(x => x.FromType)
-    @Html.TextBoxFor(x => x.FromId)
+    <script>
+        function MakeActive(data) {
+            var tabs = $('#transactionTabs .nav-link');
+            tabs.removeClass("active");
+            var links = data.getElementsByClassName('nav-link');
+            $(links[0]).addClass("active");
+        }
 
-    @Html.TextBoxFor(x => x.ToType)
-    @Html.TextBoxFor(x => x.ToId)
+        function ShowTab(tabName) {
+            $('.transactionForm').hide();
+            $('#' + tabName).show();
+        }
 
+        $.fn.datepicker.defaults.format = "dd.MM.yyyy";
+        $('.datepicker').datepicker();
 
-    @Html.TextBoxFor(x => x.Amount) @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
-
-    @Html.TextBoxFor(x=>x.Date)
-    @Html.TextBoxFor(x=>x.Comment)
-    
-    <button type="submit">Add</button>
-}
+    </script>
+}*@

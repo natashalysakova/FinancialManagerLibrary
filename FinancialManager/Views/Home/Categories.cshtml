@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+}
+<div ng-controller="CategoryController" class="row">
+    <div class="col-8">
+        <h3>Категории</h3>
+
+        <table class="table table-hover" ng-cloak id="categories">
+            <thead>
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Потрачено
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="{{item.Id}}" ng-repeat="item in categories">
+
+                    <td class="align-middle">
+                        <span class="view" ng-bind="item.Name"></span>
+                        <input class="form-control hidden edit" ng-model="item.Name" data-val="true" data-val-required="Требуется поле Name." id="Name" name="Name" type="text" value="">
+                    </td>
+                    <td class="align-middle">
+                        <span class="view">
+                            <span ng-bind="item.Balance | isoCurrency:item.Currency"></span>
+                            <span>/</span>
+                            <span ng-bind="item.PlannedAmount | isoCurrency:item.Currency"></span>
+                        </span>
+                        <input class="form-control hidden edit" ng-model="item.PlannedAmount" data-val="true" data-val-number="The field PlannedAmount must be a number." data-val-range="Поле PlannedAmount должно иметь значение между 0 и 1,79769313486232E+308." data-val-range-max="1.79769313486232E+308" data-val-range-min="0" data-val-required="Требуется поле PlannedAmount." id="PlannedAmount" name="PlannedAmount" type="text" value="">
+                    </td>
+                    <td>
+                        <button class="btn btn-success hidden edit btn-sm btn-block" ng-click="saveChanges(item)">Save</button>
+
+                        <button class="btn hidden edit btn-sm btn-block" ng-click="makeReadonly(item)">Cancel</button>
+
+                        <button class="btn btn-outline-info view btn-sm btn-block" ng-click="makeEditable(item)">Edit</button>
+
+                        <button class="btn btn-danger view btn-sm btn-block" ng-click="deleteCategory(item)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-4">
+        <form>
+            <h3>Добавить</h3>
+
+            <div class="form-group">
+                <label class="col-2 col-form-label" for="Name">Name</label>
+                <div class="col-10">
+                    <input class="form-control" ng-model="name" data-val="true" data-val-required="Требуется поле Name." id="Name" name="Name" type="text" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label" for="PlannedAmount">PlannedAmount</label>
+                <div class="col-10">
+                    <input class="form-control" ng-model="plannedAmount" data-val="true" data-val-number="The field PlannedAmount must be a number." data-val-range="Поле PlannedAmount должно иметь значение между 0 и 1,79769313486232E+308." data-val-range-max="1.79769313486232E+308" data-val-range-min="0" data-val-required="Требуется поле PlannedAmount." id="PlannedAmount" name="PlannedAmount" type="text" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label" for="Currency">Currency</label>
+                <div class="col-10">
+                    <select class="form-control" id="Currency" name="Currency" ng-model="currency">
+                        <option ng-init="Currency = options[0]" ng-repeat="item in currencyList" value="{{item.Item1}}">{{item.Item2}}</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary float-right" ng-click="addCategory()">Добавить</button>
+        </form>
+    </div>
+</div>

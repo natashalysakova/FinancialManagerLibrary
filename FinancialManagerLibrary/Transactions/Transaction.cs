@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using FinancialManagerLibrary.Interfaces;
 using FinancialManagerLibrary.Models;
 using FinancialManagerLibrary.Wallets;
@@ -11,7 +12,6 @@ namespace FinancialManagerLibrary.Transactions
     public class Transaction : IEntity<TransactionEntity>
     {
         private double _amount;
-        private ITransactionStrategy strategy;
 
         [Obsolete]
         public Transaction()
@@ -27,7 +27,7 @@ namespace FinancialManagerLibrary.Transactions
             Date = date;
             Currency = currency;
 
-            strategy = new 
+            //strategy = new IncomeToWalletStrategy(From, to);
 
             StartTransaction();
         }

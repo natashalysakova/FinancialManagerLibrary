@@ -1,4 +1,6 @@
-﻿function AddCategory(data) {
+﻿
+
+function AddCategory(data) {
     console.log(data);
     var category = $(data);
     $("#categories").append(category);

@@ -1,11 +1,11 @@
 ﻿@using FinancialManager.Models.InputModels
+@using FinancialManager.Models.OutputModels
 @model FinancialManager.Models.OutputModels.MainPageOutputModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Dashboard";
 }
 
-<div class="row">
-    <div class="col-md-6">
+    <div class="col-6">
         <div class="row">
             <h1>Incomes</h1>
         </div>
@@ -15,9 +15,6 @@
             {
                 @Html.Partial("_income", incomeSource)
             }
-            <div class="col-md-4">
-                @Html.Partial("_addIncome", new IncomeInputModel())
-            </div>
         </div>
 
         <div class="row">
@@ -28,9 +25,6 @@
             {
                 @Html.Partial("_wallet", wallet)
             }
-            <div class="col-md-4">
-                @Html.Partial("_addWallet", new WalletInputModel())
-            </div>
         </div>
 
         <div class="row">
@@ -42,20 +36,17 @@
             {
                 @Html.Partial("_category", category)
             }
-            <div class="col-md-4">
-                @Html.Partial("_addCategory", new CategoryInputModel())
-            </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-6">
         <div class="row">
             <div class="row">
                 <h1>Transactions</h1>
             </div>
 
             <div class="row" id="transactions">
-                <div class="col-md-4">
-                    @Html.Partial("_addTransaction", new TransactionInputModel())
+                <div class="col-12">
+                    @*@Html.Partial("_addTransaction", new TransactionInputModel())*@
                 </div>
                 @foreach (var transaction in Model.Transactions)
                 {
@@ -64,4 +55,16 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-12">
+            @Html.Partial("_addCategory", new CategoryInputModel())
+        </div>
+        <div class="col-12">
+            @Html.Partial("_addIncome", new IncomeInputModel())
+        </div>
+        <div class="col-12">
+            @Html.Partial("_addWallet", new WalletInputModel())
+        </div>
+
+    </div>
+

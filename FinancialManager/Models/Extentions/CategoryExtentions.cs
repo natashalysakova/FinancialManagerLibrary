@@ -13,7 +13,7 @@ namespace FinancialManager.Models.Extentions
             var model = new CategoryOutputModel
             {
                 Name = category.Name,
-                Currency = CurrencyTools.GetCurrencySymbol(category.Currency),
+                Currency = category.Currency.ToString(),
                 PlannedAmount = category.PlannedAmount,
                 Balance = category.Balance,
                 Id = category.Id,
