@@ -35,8 +35,11 @@ namespace FinancialManager
                 "~/Scripts/respond.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
-                "~/Scripts/Site.js*").IncludeDirectory("~/Scripts/Controllers", "*.js"));
-
+                "~/Scripts/Site.js*"));
+            bundles.Add(new ScriptBundle("~/bundles/category").Include(
+                "~/Scripts/Controllers/category-controller.js"));
+            bundles.Add(new ScriptBundle("~/bundles/transaction").Include(
+                "~/Scripts/Controllers/transaction-controller.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
