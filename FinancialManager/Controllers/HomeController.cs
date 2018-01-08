@@ -11,6 +11,7 @@ using FinancialManagerLibrary.Utilities;
 using FinancialManager.Models.OutputModels;
 using FinancialManager.Models.InputModels;
 using System;
+using System.Threading;
 using FinancialManagerLibrary.Transactions;
 using FinancialManager.Models.Extentions;
 using FinancialManagerLibrary.Wallets;
@@ -101,19 +102,15 @@ namespace FinancialManager.Controllers
             return new HttpStatusCodeResult(422);
         }
 
-        public ActionResult AddTransaction()
+        public ActionResult Transactions()
         {
-            //ViewBag.CurrencyList = CurrencyTools.GetCurrencyList().ConvertSelectListItems();
+            return View();
+        }
 
-            //ViewBag.IncomeSourceList = _service.GetSourceList(ListTypes.Income).ConvertSelectListItems();
-            //ViewBag.ExpencesSourceList = _service.GetSourceList(ListTypes.Expences).ConvertSelectListItems();
-            //ViewBag.TransfeSourceList = _service.GetSourceList(ListTypes.Transfer).ConvertSelectListItems();
-
-            //ViewBag.IncomeTargetList = _service.GetTargetList(ListTypes.Income).ConvertSelectListItems();
-            //ViewBag.ExpencesTargetList = _service.GetTargetList(ListTypes.Expences).ConvertSelectListItems();
-            //ViewBag.TransfeTargetList = _service.GetTargetList(ListTypes.Transfer).ConvertSelectListItems();
-
-            return View("_addTransaction");
+        [HttpPost]
+        public ActionResult GetTransactions()
+        {
+            return Json(_service.GetAllTransactions().Select(x => x.MapToTransactionOutputModel()).OrderBy(x => x.Date));
         }
 
 

@@ -6,7 +6,7 @@ FinancialManagerApp.controller('CategoryController',
             $scope.categories = null;
             $scope.currencyList = null;
             $scope.name = "";
-            $scope.plannedAmount = 0;
+            $scope.plannedAmount = '';
             $scope.currency = "UAH";
 
             //get currency list
@@ -18,11 +18,16 @@ FinancialManagerApp.controller('CategoryController',
             },
                 function (error) {
                 });
+
+            //get categories
             $http({
                 method: 'POST',
                 url: '/Home/GetCategories'
             }).then(function (success) {
                 $scope.categories = success.data;
+                $('#categories').show();
+                $('#spinner').hide();
+
             },
                 function (error) {
                 });
@@ -83,13 +88,13 @@ FinancialManagerApp.controller('CategoryController',
 
                 $http.post('/Home/EditCategory', { model: $scope.inputModel })
                     .then(
-                        function (success) {
-                            // handle success here
-                            $scope.categories = success.data;
-                            $scope.makeReadonly(item);
-                        },
-                        function (error) {
-                        });
+                    function (success) {
+                        // handle success here
+                        $scope.categories = success.data;
+                        $scope.makeReadonly(item);
+                    },
+                    function (error) {
+                    });
             }
         }
 

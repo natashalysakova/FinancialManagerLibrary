@@ -39,21 +39,21 @@ h1 {
     padding-right: 0;
 }
 
-.sidebar .nav {
-    margin-bottom: 20px;
-}
+    .sidebar .nav {
+        margin-bottom: 20px;
+    }
 
-.sidebar .nav-item {
-    width: 100%;
-}
+    .sidebar .nav-item {
+        width: 100%;
+    }
 
-.sidebar .nav-item + .nav-item {
-    margin-left: 0;
-}
+        .sidebar .nav-item + .nav-item {
+            margin-left: 0;
+        }
 
-.sidebar .nav-link {
-    border-radius: 0;
-}
+    .sidebar .nav-link {
+        border-radius: 0;
+    }
 
 /*
  * Dashboard
@@ -71,4 +71,21 @@ h1 {
 
 .hidden {
     display: none;
+}
+
+.table-hover-row {
+    padding: 5px;
+}
+
+    .table-hover-row:hover {
+        background-color: rgb(238, 238, 238);
+        border-radius: .25rem;
+    }
+
+.btn-block + .btn-block {
+        margin: 0;
+    }
+
+.btn-outline-info {
+    background-color: #ffffff;
 }
