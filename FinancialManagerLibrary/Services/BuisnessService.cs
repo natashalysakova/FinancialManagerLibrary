@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using FinancialManagerLibrary;
 using FinancialManagerLibrary.Interfaces;
 using FinancialManagerLibrary.Repositories;
@@ -27,6 +29,71 @@ namespace FinancialManager.Services
             _transactionRepository = new BaseRepository<Transaction, TransactionEntity>(service.TransactionService);
         }
 
+        public IEnumerable<(int, string)> GetSourceList(ListTypes type)
+        {
+            List<(int, string)> _list = new List<(int, string)>();
+
+            switch (type)
+            {
+                case ListTypes.Income:
+                    _list.AddRange(_incomeRepository
+                        .GetAll()
+                        .Select(x => (x.Id, x.Name)));
+                    break;
+                case ListTypes.Expences:
+                    _list.AddRange(_walletRepository
+                        .GetAll()
+                        .Select(x => (x.Id, x.Name)));
+                    break;
+                case ListTypes.Transfer:
+                    _list.AddRange(_walletRepository
+                        .GetAll()
+                        .Select(x => (x.Id, x.Name)));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+
+            return _list;
+        }
+
+        public IEnumerable<(int, string)> GetTargetList(ListTypes type)
+        {
+            List<(int, string)> _list = new List<(int, string)>();
+
+            switch (type)
+            {
+                case ListTypes.Income:
+                    _list.AddRange(_walletRepository
+                        .GetAll()
+                        .Select(x => (x.Id, x.Name)));
+                    break;
+                case ListTypes.Expences:
+                    _list.AddRange(_categoryRepository
+                        .GetAll()
+                        .Select(x => (x.Id, x.Name)));
+                    break;
+                case ListTypes.Transfer:
+                    _list.AddRange(_walletRepository
+                        .GetAll()
+                        .Select(x => (x.Id, x.Name)));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+
+            return _list;
+        }
+
+        public Category EditCategory(Category model)
+        {
+            return _categoryRepository.Update(model);
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            return _categoryRepository.Delete(id);
+        }
 
         public Category AddCategory(Category category)
         {
@@ -46,8 +113,6 @@ namespace FinancialManager.Services
         public Transaction AddTransaction(Transaction transaction)
         {
             var newTransaction = _transactionRepository.Add(transaction);
-
-
 
             if (transaction.From is Wallet)
             {
@@ -104,5 +169,12 @@ namespace FinancialManager.Services
         {
             return _walletRepository.Add(wallet);
         }
+    }
+
+    public enum ListTypes
+    {
+        Income,
+        Expences,
+        Transfer
     }
 }

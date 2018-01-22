@@ -1,10 +1,28 @@
 ﻿@model FinancialManager.Models.InputModels.CategoryInputModel
 
-@using (Ajax.BeginForm("AddCategory", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddCategory(data);", OnFailure = "OnError(error)" }))
+<h3>Add new category</h3>
+
+@*@using (Ajax.BeginForm("AddCategory", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddCategory(data);", OnFailure = "OnError(error)" }))
 {
-    @Html.TextBoxFor(x => x.Name)
-    @Html.TextBoxFor(x => x.PlannedAmount)
-    @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
-    
-    <button class="btn" type="submit">Add</button>
-}
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Name, "Name", new { @class = "col-2 col-form-label" })
+        <div class="col-10">
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.PlannedAmount, "Planned", new { @class = "col-2 col-form-label" })
+        <div class="col-10">
+            @Html.TextBoxFor(x => x.PlannedAmount, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Currency, "Currency", new { @class = "col-2 col-form-label" })
+        <div class="col-10">
+            @*Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList), new { @class = "form-control" })
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Add</button>
+}*@
+
+

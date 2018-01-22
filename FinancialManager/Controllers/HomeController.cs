@@ -11,6 +11,7 @@ using FinancialManagerLibrary.Utilities;
 using FinancialManager.Models.OutputModels;
 using FinancialManager.Models.InputModels;
 using System;
+using System.Threading;
 using FinancialManagerLibrary.Transactions;
 using FinancialManager.Models.Extentions;
 using FinancialManagerLibrary.Wallets;
@@ -45,20 +46,73 @@ namespace FinancialManager.Controllers
         }
 
         [HttpPost]
+        public ActionResult GetCurrencyList()
+        {
+            return Json(CurrencyTools.GetCurrencyList().ConvertSelectListItems());
+        }
+
+        [HttpPost]
+        public ActionResult GetCategories()
+        {
+            return Json(_service.GetAllCategories().Select(x => x.MapToCategoryOutputModel()).OrderBy(x=>x.Name));
+        }
+
+
+        public ActionResult Categories()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult AddCategory(CategoryInputModel model)
         {
             if (ModelState.IsValid)
             {
                 var category = new Category(model.Name, CurrencyTools.GetCurrency(model.Currency), model.PlannedAmount);
-                category = _service.AddCategory(category);
-                var categoryOutputModel = category.MapToCategoryOutputModel();
-
-
-                return PartialView("_category", categoryOutputModel);
+                _service.AddCategory(category);
+                return GetCategories();
             }
 
             return new HttpStatusCodeResult(422);
         }
+
+        [HttpPost]
+        public ActionResult DeleteCategory(int id)
+        {
+            if (_service.DeleteCategory(id))
+            {
+                return  new HttpStatusCodeResult(200);
+            }
+
+            return new HttpStatusCodeResult(500);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(CategoryInputModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var category = _service.GetCategory(model.Id);
+                category.Name = model.Name;
+                category.PlannedAmount = model.PlannedAmount;
+                _service.EditCategory(category);
+                return GetCategories();
+            }
+
+            return new HttpStatusCodeResult(422);
+        }
+
+        public ActionResult Transactions()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetTransactions()
+        {
+            return Json(_service.GetAllTransactions().Select(x => x.MapToTransactionOutputModel()).OrderBy(x => x.Date));
+        }
+
 
         [HttpPost]
         public ActionResult AddTransaction(TransactionInputModel model)
@@ -144,19 +198,9 @@ namespace FinancialManager.Controllers
 
     public static class SelectListItemConverter
     {
-        public static IEnumerable<SelectListItem> ConvertSelectListItems(this IEnumerable<string> list)
+        public static IEnumerable<(string id, string name)> ConvertSelectListItems(this IEnumerable<string> list)
         {
-            List<SelectListItem> _items = new List<SelectListItem>();
-            foreach (var currency in list)
-            {
-                _items.Add(new SelectListItem()
-                {
-                    Value = currency,
-                    Text = currency,
-                });
-            }
-
-            return _items;
+            return list.Select(currency => (currency, currency));
         }
     }
 }

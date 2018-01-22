@@ -64,7 +64,7 @@ namespace FinancialManagerLibrary
                 Currency = Currency,
                 Name = Name,
                 PlannedAmount = PlannedAmount,
-                SubCategories = SubCategories.Select(x => x.MapToEntity())
+                SubCategories = SubCategories?.Select(x => x.MapToEntity())
             };
             return entity;
         }

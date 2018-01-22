@@ -7,6 +7,8 @@ namespace FinancialManager.Models.InputModels
 {
     public class CategoryInputModel
     {
+        public int Id { get; set; }
+
         [Required]
         [DataType(DataType.Text)]
         public string Name { get; set; }

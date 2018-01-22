@@ -1,0 +1,225 @@
+﻿
+
+
+
+<div ng-controller="TransactionController" class="row">
+    <div class="col-8">
+        <h3>Категории</h3>
+
+        <p id="spinner">Loading...</p>
+        <div class="table table-hover hidden" id="categories">
+            <div class="row">
+                <div class="col-5">Название</div>
+                <div class="col-3">Потрачено</div>
+            </div>
+            <div class="row  table-hover-row" id="{{item.Id}}" ng-repeat="item in transactions">
+                @*Amount = transaction.Amount,
+                Comment = transaction.Comment,
+                Date = transaction.Date,
+                From = transaction.From.Name,
+                To = transaction.To.Name,
+                Currency = CurrencyTools.GetCurrencySymbol(transaction.Currency),
+                Id = transaction.Id*@
+
+                <div class="col-5">
+                    <span class="view align-middle" ng-bind="item.From"></span>
+                    <input class="form-control hidden edit" ng-model="item.From" data-val="true" data-val-required="Требуется поле From." id="From" name="From" type="text" value="">
+                </div>
+                <div class="col-5">
+                    <span class="view align-middle" ng-bind="item.To"></span>
+                    <input class="form-control hidden edit" ng-model="item.To" data-val="true" data-val-required="Требуется поле To." id="To" name="To" type="text" value="">
+                </div>
+                <div class="col-3 ">
+                    <span class="view align-middle">
+                        <span ng-bind="item.Amount | isoCurrency:item.Currency"></span>
+                    </span>
+                    <input class="form-control hidden edit" ng-model="item.Amount" data-val="true" data-val-number="The field Amount must be a number." data-val-range="Поле Amount должно иметь значение между 0 и 1,79769313486232E+308." data-val-range-max="1.79769313486232E+308" data-val-range-min="0" data-val-required="Требуется поле Amount." id="Amount" name="Amount" type="text" value="">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-success hidden btn-sm btn-block edit" ng-click="saveChanges(item)">Save</button>
+                    <button class="btn btn-outline-info btn-sm btn-block view" ng-click="makeEditable(item)">Edit</button>
+                </div>
+                <div class="col-2">
+                    <button class="btn hidden btn-sm btn-block edit" ng-click="makeReadonly(item)">Cancel</button>
+                    <button class="btn btn-danger btn-sm btn-block view" ng-click="deleteCategory(item)">Delete</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4">
+        <h3>Добавить</h3>
+        <ul class="nav nav-tabs" id="transactionTabs">
+            <li class="nav-item" onclick="MakeActive(this)">
+                <a class="nav-link active" onclick="ShowTab('output')">Расход</a>
+            </li>
+            <li class="nav-item" onclick="MakeActive(this)">
+                <a class="nav-link" onclick="ShowTab('input')">Доход</a>
+            </li>
+            <li class="nav-item" onclick="MakeActive(this)">
+                <a class="nav-link" onclick="ShowTab('transfer')">Перевод</a>
+            </li>
+        </ul>
+
+        <form>
+            <div class="form-group">
+                <label class="sr-only" for="Name">Название</label>
+                <input class="form-control" ng-model="name" data-val="true" data-val-required="Требуется поле Name." id="Name" name="Name" type="text" value="" placeholder="Название">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="PlannedAmount">Лимит</label>
+                <input class="form-control" ng-model="plannedAmount" data-val="true" data-val-number="The field PlannedAmount must be a number." data-val-range="Поле PlannedAmount должно иметь значение между 0 и 1,79769313486232E+308." data-val-range-max="1.79769313486232E+308" data-val-range-min="0" data-val-required="Требуется поле PlannedAmount." id="PlannedAmount" name="PlannedAmount" type="text" value="" placeholder="Лимит">
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label" for="Currency">Валюта</label>
+                <div class="col-5">
+                    <select class="form-control" id="Currency" name="Currency" ng-model="currency">
+                        <option ng-init="Currency = options[0]" ng-repeat="item in currencyList" value="{{item.Item1}}">{{item.Item2}}</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary float-right" ng-click="addCategory()">Добавить</button>
+        </form>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/transaction");
+}
+
+
+@*<div class="col-8 transactionForm" id="output">
+        <form>
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.FromType, new { @Value = "Wallet", @class = "hidden" })
+            @Html.LabelFor(x => x.FromId, "Из", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.FromId, new List<SelectListItem>(ViewBag.ExpencesSourceList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.ToType, new { @Value = "Category", @class = "hidden" })
+            @Html.LabelFor(x => x.ToId, "В", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.ToId, new List<SelectListItem>(ViewBag.ExpencesTargetList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Amount, "Сумма", new { @class = "col-2 col-form-label" })
+            <div class="col-6">
+                @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+            </div>
+            <div class="col-4">
+                @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList), new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessage(nameof(Model.Currency))
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Дата", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Date, new { @class = "form-control", @data_provide = "datepicker" })
+            </div>
+            @Html.ValidationMessage(nameof(Model.Date))
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Комментарий", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Comment, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessage(nameof(Model.Comment))
+        </div>
+
+        <button type="submit" class="btn btn-primary">Добавить</button>
+        <button type="reset" class="btn btn-primary">Сбросить</button>
+
+    </form>
+</div>
+<div class=" transactionForm hidden" id="input">
+    @using (Ajax.BeginForm("AddTransaction", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddTransaction(data);", OnFailure = "OnError(error)" }))
+    {
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.FromType, new { @Value = "Wallet", @class = "hidden" })
+            @Html.LabelFor(x => x.FromId, "Из", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.FromId, new List<SelectListItem>(ViewBag.ExpencesSourceList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.TextBoxFor(x => x.ToType, new { @Value = "Category", @class = "hidden" })
+            @Html.LabelFor(x => x.ToId, "В", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.DropDownListFor(x => x.ToId, new List<SelectListItem>(ViewBag.ExpencesTargetList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Amount, "Сумма", new { @class = "col-2 col-form-label" })
+            <div class="col-8">
+                @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+            </div>
+            <div class="col-2">
+                @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Дата", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+            </div>
+
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Date, "Дата", new { @class = "col-2 col-form-label" })
+            <div class="col-10">
+                @Html.TextBoxFor(x => x.Comment, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    }
+</div>
+
+<div class="transactionForm hidden" id="transfer">
+    @using (Ajax.BeginForm("AddTransaction", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "AddTransaction(data);", OnFailure = "OnError(error)" }))
+    {
+        <p>Перевод</p>
+
+        @Html.TextBoxFor(x => x.FromType)
+
+        @Html.TextBoxFor(x => x.ToType)
+
+
+        @Html.TextBoxFor(x => x.Amount) @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
+
+        @Html.TextBoxFor(x => x.Date)
+        <button type="submit">Add</button>
+    }
+</div>
+
+@section scripts
+{
+    <script>
+        function MakeActive(data) {
+            var tabs = $('#transactionTabs .nav-link');
+            tabs.removeClass("active");
+            var links = data.getElementsByClassName('nav-link');
+            $(links[0]).addClass("active");
+        }
+
+        function ShowTab(tabName) {
+            $('.transactionForm').hide();
+            $('#' + tabName).show();
+        }
+
+        $.fn.datepicker.defaults.format = "dd.MM.yyyy";
+        $('.datepicker').datepicker();
+
+    </script>
+}*@

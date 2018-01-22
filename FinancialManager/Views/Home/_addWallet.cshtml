@@ -4,7 +4,7 @@
 {
     @Html.TextBoxFor(x => x.Name)
     @Html.TextBoxFor(x => x.Balance)
-    @Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))
+    @*@Html.DropDownListFor(x => x.Currency, new List<SelectListItem>(ViewBag.CurrencyList))*@
 
     @Html.CheckBoxFor(x=>x.IsCreditCard)
     @Html.TextBoxFor(x=>x.Overdraft)
