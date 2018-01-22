@@ -9,5 +9,9 @@ namespace FinancialManagerLibrary.Interfaces
         IDataService<TransactionEntity> TransactionService { get; }
         IDataService<IncomeEntity> IncomeService { get; }
 
+        IDataService<PriceEntity> PriceService { get; }
+        IDataService<TarifEntity> TarifService { get; }
+        IDataService<RecordEntity> RecordService { get; }
+
     }
 }

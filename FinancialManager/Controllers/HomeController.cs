@@ -20,13 +20,13 @@ namespace FinancialManager.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BuisnessService _service;
+        private readonly FinancialService _service;
 
         public HomeController()
         {
             var contextName = "FinancialManagerModel";
             IFinancialDataSource source = new EntityDataSource(contextName);
-            _service = new BuisnessService(source);
+            _service = new FinancialService(source);
         }
 
         public ActionResult Index()

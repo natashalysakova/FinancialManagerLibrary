@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FinancialManagerLibrary.Interfaces;
-using FinancialManagerLibrary.Models;
 using FinancialManagerLibrary.Transactions;
 using FinancialManagerLibrary.Wallets;
 using System;
+using FinancialManagerLibrary.Models;
 
 namespace FinancialManagerLibrary
 {

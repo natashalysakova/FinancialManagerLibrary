@@ -11,7 +11,7 @@ using FinancialManagerLibrary.Models;
 
 namespace FinancialManager.Services
 {
-    public class BuisnessService
+    public class FinancialService
     {
         private readonly BaseRepository<Category, CategoryEntity> _categoryRepository;
         private readonly BaseRepository<Wallet, WalletEntity> _walletRepository;
@@ -19,8 +19,7 @@ namespace FinancialManager.Services
         private readonly BaseRepository<Transaction, TransactionEntity> _transactionRepository;
 
 
-
-        public BuisnessService(IFinancialDataSource service)
+        public FinancialService(IFinancialDataSource service)
         {
             _categoryRepository = new BaseRepository<Category, CategoryEntity>(service.CategoryService);
             _walletRepository = new BaseRepository<Wallet, WalletEntity>(service.WalletService);

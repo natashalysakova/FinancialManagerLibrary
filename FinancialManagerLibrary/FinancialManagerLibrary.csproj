@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="Enums\PriceType.cs" />
+    <Compile Include="Enums\RecordType.cs" />
     <Compile Include="Interfaces\IFinancialDataSource.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -48,11 +50,18 @@
     <Compile Include="Models\CategoryEntity.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\IncomeEntity.cs" />
+    <Compile Include="Models\PriceEntity.cs" />
+    <Compile Include="Models\RecordEntity.cs" />
+    <Compile Include="Models\TarifEntity.cs" />
     <Compile Include="Models\TransactionEntity.cs" />
     <Compile Include="Models\WalletEntity.cs" />
+    <Compile Include="Price.cs" />
+    <Compile Include="Record.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Services\BuisnessService.cs" />
+    <Compile Include="Services\ServicesService.cs" />
     <Compile Include="Strategies\ITransactionStrategy.cs" />
+    <Compile Include="Tarif.cs" />
     <Compile Include="TransactionBase.cs" />
     <Compile Include="TransactionItemType.cs" />
     <Compile Include="Utilities\CurrencyTool.cs" />
@@ -60,7 +69,7 @@
     <Compile Include="Exceptions\OverdraftLimitReachedException.cs" />
     <Compile Include="Wallets\TransactionIncomeImplementation.cs" />
     <Compile Include="Wallets\TransactionSourceDefaultImplementation.cs" />
-    <Compile Include="Currency.cs" />
+    <Compile Include="Enums\Currency.cs" />
     <Compile Include="Incomes\Income.cs" />
     <Compile Include="Interfaces\IPlanned.cs" />
     <Compile Include="Transactions\ITransactionSource.cs" />
